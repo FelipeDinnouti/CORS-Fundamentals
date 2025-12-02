@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend</title>
+</head>
+<body>
+    <h1>Client</h1>
+    <button onclick="makeRequest()">Call API</button>
+    <pre id="result"></pre>
+
+    <script>
+        const API_URL = 'http://localhost:8080/api/mensagem';
+        const resultElement = document.getElementById('result');
+
+        async function makeRequest() {
+            resultElement.textContent = 'Loading...';
+
+            try {
+                const response = await fetch(API_URL);
+
+                const data = await response.json();
+                resultElement.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultElement.textContent = "Requisition error, check console for more info.";
+                console.error("Error on requisition: ", error);
+            }
+        }
+    </script>
+    
+</body>
+</html>
